@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>entry</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!--SUGGESTION TEXTBOX CSS-->
+    <link href="css/suggestion_textbox.css">
+
+    <!-- Angular JS for the app Purpose-->
+    <script src="vendor/AngularJS/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.0.js"></script>
+    <!-- JAVA SCRIPT FOR THE ENTRY FORM CUSTOM-->
+    <script src="js/sb_custom_js.js"></script>
+    <!-- Including the header and the footer-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!--HEADER AND FOORTER INCLUDE-->
+    <script>
+        $(function(){
+            $("#header").load("pages/header.html");
+            $("#footer").load("pages/footer.html");
+        });
+    </script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" ng-app="shailesh_banthia" ng-controller="add_hotel">
+<!--header of the page-->
+<div id="header"></div>
+<!-- Main Content-->
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Add Hotel</li>
+        </ol>
+        <!-- Making the entry form-->
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header">Booking Voucher</div>
+            <div class="card-body">
+                <form ng-submit="submit_form_data()">
+                    <!-- HOTEL NAME AND CITY-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="hotel_name">Hotel Name : </label>
+                                <input type="text" required id="hotel_name" class="form-control" placeholder="Hotel Name" ng-model="newHotel.xname">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="city">City : </label>
+                                <!--<select id="city" required ng-model="newHotel.city" class="form-control">-->
+                                    <!--<option ng-repeat="x in city_det" ng-value="x" ng-select="x.id">{{x.xname}}</option>-->
+                                <!--</select>-->
+                                <input ng-model="newHotel.city.xname" required class="form-control" id="city" placeholder="City Name">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="state">State : </label>
+                                <!--<select id="city" required ng-model="newHotel.city" class="form-control">-->
+                                <!--<option ng-repeat="x in city_det" ng-value="x" ng-select="x.id">{{x.xname}}</option>-->
+                                <!--</select>-->
+                                <input ng-model="newHotel.city.state" required class="form-control" id="state" placeholder="State Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="add1">Address 1 :</label>
+                                <input class="form-control" required  type="text" id="add1" ng-model="newHotel.add1" placeholder="Address"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="add2">Address 2 :</label>
+                                <input class="form-control" required  type="text" id="add2" ng-model="newHotel.add2" placeholder="address"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CHK IN TIME CK OUT TIME PINCODE-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="chk_in_time">Pincode :</label>
+                                <input class="form-control" ng-min required  type="number" id="chk_in_time" ng-model="newHotel.pincode" placeholder="Pincode"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="chk_in_time">Check IN Time :</label>
+                                <input class="form-control" ng-min required  type="number" id="chk_in_time" ng-model="newHotel.chk_in_time" placeholder="Check IN time"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="chk_out_time">Check OUT Time :</label>
+                                <input class="form-control" required  type="number" id="chk_out_time" ng-model="newHotel.chk_out_time" placeholder="Check OUT time"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="phn_no">Phone Number :</label>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item" ng-repeat="x in phn_no">
+                                        <input class="form-control" required type="text" id="phn_no" ng-model="phn_no[$index].num" placeholder="Phone No. {{$index +1}}"/>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-success" type="button" ng-click="add_phn()">+</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email_id">Email ID:</label>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item" ng-repeat="x in mail">
+                                        <input class="form-control" required type="text" id="email_id" ng-model="mail[$index].mail" placeholder="Email ID {{$index +1}}"/>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-success" type="button" ng-click="add_mail()">+</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Details</label>
+                        <div class="form-row" ng-repeat="x in contact">
+                            <div class="col-md-3">
+                                <input class="form-control" placeholder="Name"
+                                        ng-model="contact[$index].name" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" placeholder="Phone No."
+                                       ng-model="contact[$index].phn_no" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" placeholder="Email Address"
+                                       ng-model="contact[$index].email" required>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" placeholder="Remarks"
+                                       ng-model="contact[$index].remarks" required>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" ng-click="add_contact()">+</button>
+                    </div>
+
+                    <!--SUBMINT BUTTON-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+
+        <!--Footer of the page-->
+        <div id="footer"></div>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+</div>
+</body>
+
+</html>

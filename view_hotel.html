@@ -1,0 +1,535 @@
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!-- Angular JS for the app Purpose-->
+    <script src="vendor/AngularJS/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.0.js"></script>
+    <!-- JAVA SCRIPT FOR THE ENTRY FORM CUSTOM-->
+    <script src="js/sb_custom_js.js"></script>
+    <!-- Including the header and the footer-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!--HEADER AND FOORTER INCLUDE-->
+    <script>
+        $(function () {
+            $("#header").load("pages/header.html");
+            $("#footer").load("pages/footer.html");
+        });
+        $(document).ready(function () {
+            $('#hotel_list').DataTable();
+        });
+    </script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" ng-app="shailesh_banthia" ng-controller="view_hotel">
+<!-- Navigation-->
+<div id="header"></div>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">View Hotels</li>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Table Example
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="hotel_list" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>View/Update</th>
+                            <th>Name</th>
+                            <th>city</th>
+                            <th>State</th>
+                            <th>Add/Remove Contact</th>
+                            <th>Add/Remove Phone No.</th>
+                            <th>Add/Remove Email ID</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in hotel_mst">
+                            <td>
+                                <button class="btn btn-secondary" ng-click="test(x)" data-toggle="modal"
+                                        data-target="#myModal"> <i class="fa 2x fa-eye" ></i></button>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#update_form"
+                                        ng-click="test(x)"><i class="fa 2x fa-external-link"></i></button>
+                            </td>
+                            <td>{{x.xname | uppercase}}</td>
+                            <td>{{x.city_name | uppercase}}</td>
+                            <td>{{x.state | uppercase}}</td>
+                            <td>
+                                <button class="btn btn-primary" data-toggle="modal"
+                                        data-target="#add_contact" ng-click="test(x)">+
+                                </button>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                        data-target="#update_contact" ng-click="test(x)">-
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" data-toggle="modal"
+                                        data-target="#add_phn_no" ng-click="test(x)">+
+                                </button>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                        data-target="#update_phn_no" ng-click="test(x)">-
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" data-toggle="modal"
+                                        data-target="#add_mail" ng-click="test(x)">+
+                                </button>
+                                <button class="btn btn-danger" data-toggle="modal"
+                                        data-target="#update_mail" ng-click="test(x)">-
+                                </button>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <div id="footer"></div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table class="table table-hover table-bordered">
+                    <tr>
+                        <td>Name</td>
+                        <th>{{selecteddata.xname | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <th>{{selecteddata.city_name | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Add</td>
+                        <th>{{selecteddata.add1 | uppercase}},</th>
+
+                    </tr>
+                    <tr>
+                        <th>{{selecteddata.add2 | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>Check IN Time</td>
+                        <th>{{selecteddata.chk_in_time | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>Check OUT Time</td>
+                        <th>{{selecteddata.chk_out_time | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>Phone No</td>
+                        <th>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="x in hotel_data.phn_no">
+                                    {{x.phn_no}}
+                                </li>
+                            </ul>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Email ID</td>
+                        <th>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="x in hotel_data.email">
+                                    {{x.email_id}}
+                                </li>
+                            </ul>
+                        </th>
+                    </tr>
+                </table>
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Name :</th>
+                        <th>Phone No:</th>
+                        <th>Email ID:</th>
+                        <th>Remarks:</th>
+                    </tr>
+                    <tr ng-repeat="x in hotel_data.contact">
+                        <td>{{x.xname}}</td>
+                        <td>{{x.phn_no}}</td>
+                        <td>{{x.email_id}}</td>
+                        <td>{{x.remarks}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--UPDATE MODAL-->
+<div class="modal fade" id="update_form">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form ng-submit="update_hotel()">
+                    <!-- HOTEL NAME AND CITY-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="hotel_name">Hotel Name : </label>
+                                <input type="text" required id="hotel_name" class="form-control" placeholder="Hotel Name" ng-model="newHotel.xname">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="city">City : </label>
+                                <!--<select id="city" required ng-model="newHotel.city" class="form-control">-->
+                                <!--<option ng-repeat="x in city_det" ng-value="x" ng-select="x.id">{{x.xname}}</option>-->
+                                <!--</select>-->
+                                <input ng-model="newHotel.city_name" required class="form-control" id="city" placeholder="City Name">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="state">State : </label>
+                                <!--<select id="city" required ng-model="newHotel.city" class="form-control">-->
+                                <!--<option ng-repeat="x in city_det" ng-value="x" ng-select="x.id">{{x.xname}}</option>-->
+                                <!--</select>-->
+                                <input ng-model="newHotel.state" required class="form-control" id="state" placeholder="State Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="add1">Address 1 :</label>
+                                <input class="form-control" required  type="text" id="add1" ng-model="newHotel.add1" placeholder="Address"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="add2">Address 2 :</label>
+                                <input class="form-control" required  type="text" id="add2" ng-model="newHotel.add2" placeholder="address"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CHK IN TIME CK OUT TIME PINCODE-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="chk_in_time">Pincode :</label>
+                                <input class="form-control" ng-min required  type="text" id="chk_in_time" ng-model="newHotel.pincode" placeholder="Pincode"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="chk_in_time">Check IN Time :</label>
+                                <input class="form-control" ng-min required  type="text" id="chk_in_time" ng-model="newHotel.chk_in_time" placeholder="Check IN time"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="chk_out_time">Check OUT Time :</label>
+                                <input class="form-control" required  type="text" id="chk_out_time" ng-model="newHotel.chk_out_time" placeholder="Check OUT time"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--SUBMINT BUTTON-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--Contact diaplay-->
+<div class="modal fade" id="update_contact">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Remove Contact</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th></th>
+                        <th>Name :</th>
+                        <th>Phone No:</th>
+                        <th>Email ID:</th>
+                        <th>Remarks:</th>
+                    </tr>
+                    <tr ng-repeat="x in hotel_data.contact">
+                        <td><button class="btn btn-danger" ng-click="remove_contact(x)"></button></td>
+                        <td>{{x.xname}}</td>
+                        <td>{{x.phn_no}}</td>
+                        <td>{{x.email_id}}</td>
+                        <td>{{x.remarks}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--contact update form-->
+<div class="modal fade" id="add_contact">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add Contact</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form ng-submit="add_contact()">
+                <div class="form-group">
+                    <label>Contact Details</label>
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="Name"
+                                   ng-model="contact.name" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="Phone No."
+                                   ng-model="contact.phn_no" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="Email Address"
+                                   ng-model="contact.email" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="Remarks"
+                                   ng-model="contact.remarks" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--phnno add-->
+<div class="modal fade" id="add_phn_no">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form ng-submit="add_phn_no()">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-9">
+                            <input type="number" placeholder="Phone Number" ng-model="newphn_no.phn" required class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--phn remove-->
+<div class="modal fade" id="update_phn_no">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Remove Phone Numbers</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table class="table table-hover table-bordered">
+
+                    <tr>
+                        <td>Phone No</td>
+                        <th>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="x in hotel_data.phn_no">
+                                    <button type="button" class="btn btn-danger" ng-click="remove_phn(x)">-</button>
+                                    {{x.phn_no}}
+                                </li>
+                            </ul>
+                        </th>
+                    </tr>
+                </table>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--email id add-->
+<div class="modal fade" id="add_mail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form ng-submit="add_mail()">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-9">
+                                <input type="text" placeholder="Email ID" ng-model="newmail.mail" required class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--email id remove-->
+<div class="modal fade" id="update_mail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table class="table table-hover table-bordered">
+                    <tr>
+                        <td>Email ID</td>
+                        <th>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="x in hotel_data.email">
+
+                            <button type="button" class="btn btn-danger" ng-click="remove_mail(x)">-</button>
+                        {{x.email_id}}
+                                </li>
+                            </ul>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

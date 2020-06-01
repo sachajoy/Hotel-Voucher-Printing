@@ -1,0 +1,1 @@
+<?php/** * Created by IntelliJ IDEA. * User: Arihant * Date: 05-05-2018 * Time: 09:16 */require 'connection.php';$json_output =array();$sql = "select * from cust_mst";$result = $conn->query($sql);if ($result->num_rows > 0){    while ($row = $result->fetch_assoc())        array_push($json_output,$row);    echo json_encode($json_output);}?>

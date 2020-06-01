@@ -1,0 +1,1 @@
+<?php/** * Created by IntelliJ IDEA. * User: Arihant * Date: 09-05-2018 * Time: 15:20 */require 'connection.php';$rec = file_get_contents("php://input");$res = array();$sql = "select * from cust_airline_det where cust_id = '".$rec."'";$r = $conn->query($sql);while ($row = $r->fetch_assoc())    array_push($res,$row);echo json_encode($res);?>

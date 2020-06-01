@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>client print</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!-- Angular JS for the app Purpose-->
+    <script src="vendor/AngularJS/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.0.js"></script>
+    <!-- JAVA SCRIPT FOR THE ENTRY FORM CUSTOM-->
+    <script src="js/sb_custom_js.js"></script>
+    <!-- Including the header and the footer-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!--HEADER AND FOORTER INCLUDE-->
+</head>
+
+<body ng-app="shailesh_banthia" ng-controller="view_client">
+</body>
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <td>
+            Title :
+        </td>
+        <th>{{print_det.title | uppercase}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            First Name :
+        </td>
+        <th>{{print_det.fname | uppercase}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Middle Name :
+        </td>
+        <th>{{print_det.mname | uppercase}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Last Name :
+        </td>
+        <th>{{print_det.lname | uppercase}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Date Of Birth:
+        </td>
+        <th>{{print_det.dob | date : 'dd MMM,yyyy'}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Email ID :
+        </td>
+        <th>{{print_det.email_id}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Phone No :
+        </td>
+        <th>{{print_det.phn_no}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Gender :
+        </td>
+        <th>{{print_det.gender | uppercase}}</th>
+
+
+    </tr>
+    <tr>
+        <td>
+            Father's Name :
+        </td>
+        <th>{{print_det.f_name | uppercase}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Mother's Name :
+        </td>
+        <th>{{print_det.m_name | uppercase}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            GST No. :
+        </td>
+        <th>{{print_det.gst_no}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            PAN No. :
+        </td>
+        <th>{{print_det.pan_no}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Address 1 :
+        </td>
+        <th>{{print_det.add1}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Address 2 :
+        </td>
+        <th>{{print_det.add2}}</th>
+
+    </tr>
+
+    <tr>
+        <td>
+            Passport No. :
+        </td>
+        <th>{{print_det.pass_no}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Place of birth :
+        </td>
+        <th>{{print_det.place_of_birth}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Place of Issue :
+        </td>
+        <th>{{print_det.place_of_issue}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Name of Spouse :
+        </td>
+        <th>{{print_det.spouse_name| date : 'dd MMM,yyyy'}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Nationality :
+        </td>
+        <th>{{print_det.nationality | date : 'dd MMM,yyyy'}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Issue Date :
+        </td>
+        <th>{{print_det.issue_date | date : 'dd MMM,yyyy'}}</th>
+
+    </tr>
+    <tr>
+        <td>
+            Expriy Date :
+        </td>
+        <th>{{print_det.expriy_date | date : 'dd MMM,yyyy'}}</th>
+
+    </tr>
+
+</table>
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>Airlines Name</th>
+        <th>Membership No.</th>
+        <th>Password</th>
+    </tr>
+    <tr ng-repeat="x in print_det.air_det">
+        <td>
+
+            {{x.xname}}
+        </td>
+        <td>
+
+            {{x.mem}}
+        </td>
+        <td>****
+        </td>
+    </tr>
+</table>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>entry</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!--SUGGESTION TEXTBOX CSS-->
+    <link href="css/suggestion_textbox.css">
+
+    <!-- Angular JS for the app Purpose-->
+    <script src="vendor/AngularJS/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.0.js"></script>
+    <!-- JAVA SCRIPT FOR THE ENTRY FORM CUSTOM-->
+    <script src="js/sb_custom_js.js"></script>
+    <!-- Including the header and the footer-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!--HEADER AND FOORTER INCLUDE-->
+    <script>
+        $(function () {
+            $("#header").load("pages/header.html");
+            $("#footer").load("pages/footer.html");
+        });
+    </script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" ng-app="shailesh_banthia" ng-controller="add_client">
+<!--header of the page-->
+<div id="header"></div>
+<!-- Main Content-->
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Add Client</li>
+        </ol>
+        <!-- Making the entry form-->
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header">Booking Voucher</div>
+            <div class="card-body">
+                <form ng-submit="submit_form_data()">
+                    <!-- TITLE FIRST MIDDLE LAST NAME-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <label for="title">Title :</label>
+                                <select id="title" class="form-control" class="form-control" ng-model="client.title">
+                                    <option value="Mr.">Mr.</option>
+                                    <option value="Mrs.">Mrs.</option>
+                                    <option value="Ms.">Ms.</option>
+                                    <option value="Miss.">Miss.</option>
+                                    <option value="Master">Master</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="f_name">First Name : </label>
+                                <input id="f_name" required="required" ng-model="client.f_name" class="form-control"
+                                       type="text" placeholder="First Name"/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="m_name">Middle Name : </label>
+                                <input id="m_name" ng-model="client.m_name" class="form-control" type="text"
+                                       placeholder="Middle Name"/>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="l_name">Last Name : </label>
+                                <input id="l_name" required ng-model="client.l_name" class="form-control" type="text"
+                                       placeholder="Last Name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--DOB GENDER PHN NO-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="dob">Date of Birth :</label>
+                                <input id="dob" ng-model="client.dob" class="form-control" type="date"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="gender">Gender : </label>
+                                <select id="gender" ng-model="client.gender" class="form-control">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="mob_no">Mobile Number : </label>
+                                <input id="mob_no" ng-model="client.phn_no" class="form-control" type="number"
+                                       placeholder="Mobile Number"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--EMAIL ID FATHERNAME MOTHERNAME-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="email_id">Email ID :</label>
+                                <input class="form-control" id="email_id" ng-model="client.email_id" type="text"
+                                       placeholder="Email ID">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="fname">Fathers Name:</label>
+                                <input class="form-control" id="fname" ng-model="client.fname" type="text"
+                                       placeholder="Father's Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="mname">Mother's Name:</label>
+                                <input class="form-control" id="mname" ng-model="client.mname" type="text"
+                                       placeholder="Mother's Name">
+                            </div>
+                        </div>
+                    </div>
+                    <!--ADDRESS 1,2-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="add1">Address 1 :</label>
+                                <input class="form-control" id="add1" type="text"
+                                       placeholder="Address" ng-model="client.add1">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="add2">Address 2 :</label>
+                                <input type="text" class="form-control" id="add2"
+                                       placeholder="Address" ng-model="client.add2">
+                            </div>
+                        </div>
+                    </div>
+                    <!--Pass no place of birth place of issue expriy date-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="pass_no">Passposrt No. :</label>
+                                <input class="form-control" placeholder="Passport No." ng-model="client.pass_no"
+                                       type="text" id="pass_no">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="issue">Place of issue:</label>
+                                <input class="form-control" placeholder="Place of issue" ng-model="client.place_of_issue"
+                                       type="text" id="issue">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="birth">Place of birth : </label>
+                                <input class="form-control" placeholder="Place of birth" ng-model="client.place_of_birth"
+                                       id="birth" type="text">
+                            </div>
+                            <!--<div class="col-md-3">-->
+                                <!--<label for="exp">Exp Date :</label>-->
+                                <!--<input class="form-control" ng-model="client.exp_date"-->
+                                       <!--id="pass_no" type="date">-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <!--NATIONALITY NAME OF SPOUSE-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="nation">NATIONALATY :</label>
+                                <input class="form-control" placeholder="NATIONALATY" ng-model="client.nation"
+                                       type="text" id="nation">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="spouse">NAME OF SPOUSE:</label>
+                                <input class="form-control" placeholder="NAME OF SPOUSE" ng-model="client.spouse"
+                                       type="text" id="spouse">
+                            </div>
+                            <!--<div class="col-md-3">-->
+                            <!--<label for="exp">Exp Date :</label>-->
+                            <!--<input class="form-control" ng-model="client.exp_date"-->
+                            <!--id="pass_no" type="date">-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <!--DATE OF ISSUE AND EXPIRY-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="issue">Issue Date:</label>
+                                <input class="form-control" ng-model="client.issue_date"
+                                       id="issue" type="date">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exp">Exp Date :</label>
+                                <input class="form-control" ng-model="client.exp_date"
+                                    id="pass_no" type="date">
+                            </div>
+                        </div>
+                    </div>
+                    <!--GST PAN NO-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="gst">GST No. :</label>
+                                <input class="form-control" id="gst" type="text"
+                                       placeholder="Address" ng-model="client.gst_no">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="pan">PAN No. :</label>
+                                <input type="text" class="form-control" id="pan"
+                                       placeholder="Address" ng-model="client.pan_no">
+                            </div>
+                        </div>
+                    </div>
+                    <!--AIRLINE MEMNO MEMPASS-->
+                    <div class="form-group">
+                        <label>AirLines Membership Details :</label>
+                        <div class="form-row" ng-repeat="x in airline_det">
+                            <div class="col-md-4">
+                                <!--<label for="air">AirLine Name :</label>-->
+                                <input class="form-control" id="air" ng-model="airline_det[$index].name" type="text"
+                                       placeholder="Airlines Name">
+                            </div>
+                            <div class="col-md-4">
+                                <!--<label for="mem">Membership No.:</label>-->
+                                <input class="form-control" id="mem" ng-model="airline_det[$index].mem" type="text"
+                                       placeholder="Membership No.">
+                            </div>
+                            <div class="col-md-4">
+                                <!--<label for="pass">Password :</label>-->
+                                <input class="form-control" id="pass" ng-model="airline_det[$index].pass" type="text"
+                                       placeholder="Password">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" ng-click="add_airline_det()">+</button>
+
+                    </div>
+                    <!--SUBMINT BUTTON-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Footer of the page-->
+        <div id="footer"></div>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+</div>
+</body>
+
+</html>

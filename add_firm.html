@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>entry</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!--SUGGESTION TEXTBOX CSS-->
+    <link href="css/suggestion_textbox.css">
+
+    <!-- Angular JS for the app Purpose-->
+    <script src="vendor/AngularJS/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.0.js"></script>
+    <!-- JAVA SCRIPT FOR THE ENTRY FORM CUSTOM-->
+    <script src="js/sb_custom_js.js"></script>
+    <!-- Including the header and the footer-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!--HEADER AND FOORTER INCLUDE-->
+    <script>
+        $(function(){
+            $("#header").load("pages/header.html");
+            $("#footer").load("pages/footer.html");
+        });
+    </script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" ng-app="shailesh_banthia" ng-controller="add_firm">
+<!--header of the page-->
+<div id="header"></div>
+<!-- Main Content-->
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Add Firm</li>
+        </ol>
+        <!-- Making the entry form-->
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header">New Firm Details</div>
+            <div class="card-body">
+                <form ng-submit="submit_form_data()">
+                    <!-- FIRM NAME AND MOB NO-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="firm_naem">Firm Name : </label>
+                                <input type="text" required id="firm_naem" class="form-control" placeholder="Firm Name" ng-model="firm.xname">
+                            </div>
+                        </div>
+                    </div>
+                    <!--GST NO PAN NO EMAIL ID-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="gst_no">GST No. :</label>
+                                <input class="form-control" required type="text" id="gst_no" ng-model="firm.gst_no" placeholder="GST Number"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="pan_no">PAN No. :</label>
+                                <input class="form-control" required type="text" id="pan_no" ng-model="firm.pan_no" placeholder="PAN Number"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CITY STATE AND PINCODE-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="city">City :</label>
+                                <input class="form-control" required type="text" id="city" ng-model="firm.city" placeholder="City Name"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="state">State :</label>
+                                <input class="form-control" required type="text" id="state" ng-model="firm.state" placeholder="State Name"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="pincode">Pincode :</label>
+                                <input class="form-control" required type="number" id="pincode" ng-model="firm.pincode" placeholder="Pincode"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--address -->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="add1">Address :</label>
+                                <input class="form-control" id="add1" ng-model="firm.add" required type="text" placeholder="Address">
+                            </div>
+                        </div>
+                    </div>
+                    <!--MOBILE NO AND EMAIL LIST-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="mob_no">Mobile No. : </label>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item" ng-repeat="x in mobile_no">
+                                        <input type="number" required id="mob_no" class="form-control" ng-model="mobile_no[$index].name" placeholder="Mobile Number">
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-success" type="button" ng-click="add_mob()">+</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--MAIL ID-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="emial">Email-Id :</label>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item" ng-repeat="x in email_id">
+                                        <input class="form-control" required type="text" id="emial" ng-model="email_id[$index].name" placeholder="email_id"/>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-success" type="button" ng-click="add_mail()">+</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CUSTOMERS NAME LIST-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="coust_name">Custtomer Name :</label>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item" ng-repeat="x in cust_name">
+                                        <input class="form-control" required type="text" id="coust_name" ng-model="cust_name[$index].name" placeholder="Customer Name {{$index+1}}"/>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-success" type="button" ng-click="add_cust()">+</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                  <!--SUBMINT BUTTON-->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer of the page-->
+    <div id="footer"></div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+</div>
+</body>
+
+</html>

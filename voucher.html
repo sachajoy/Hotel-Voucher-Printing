@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>entry</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!--SUGGESTION TEXTBOX CSS-->
+    <link href="css/suggestion_textbox.css">
+
+    <!-- Angular JS for the app Purpose-->
+    <script src="vendor/AngularJS/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.0.js"></script>
+    <!-- JAVA SCRIPT FOR THE ENTRY FORM CUSTOM-->
+    <script src="js/sb_custom_js.js"></script>
+    <!-- Including the header and the footer-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!--HEADER AND FOORTER INCLUDE-->
+    <script>
+        $(function(){
+            $("#header").load("pages/header.html");
+            $("#footer").load("pages/footer.html");
+        });
+    </script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" ng-app="shailesh_banthia" ng-controller="voucher">
+<!--header of the page-->
+<div id="header"></div>
+<!-- Main Content-->
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Create Voucher</li>
+        </ol>
+        <!-- Making the entry form-->
+        <div class="container">
+            <form ng-submit="">
+                <!-- GUEST NAME AND HOTEL NAME GROUOP-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="title">Guest Name :</label>
+                            <select id="title" class="form-control" ng-model="voucher.mst_guest_name" >
+                                <option ng-repeat="x in client_list | orderBy : 'fname'" ng-value="x">{{x.fname | uppercase}} {{x.lname | uppercase}},{{x.phn_no}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="hotelname">Hotel : </label>
+                            <select id="hotelname" class="form-control" ng-model="voucher.hotel_id">
+                                <option ng-repeat="x in hotel_mst | orderBy : 'xname'"  ng-value="x">{{x.xname}}, {{x.city_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--CHK IN AND OUT AND BOOKING DATE GROUP -->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="chk_in_date">Check IN :</label>
+                            <input id="chk_in_date" required ng-model="voucher.chk_in_date" class="form-control" type="date" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="chk_out_date">Check OUT :</label>
+                            <input id="chk_out_date" required ng-model="voucher.chk_out_date" class="form-control" type="date" />
+                        </div>
+                    </div>
+                </div>
+                <!--BOOKING DATE AND BOOKING COMPANY-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="booking_date">Booking Date :</label>
+                            <input id="booking_date" required ng-model="voucher.booking_date" class="form-control" type="date" placeholder="Booking Date"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="booking_company">Booking Company :</label>
+                            <input id="booking_company" required ng-model="voucher.booking_company" class="form-control" type="text" placeholder="Booking Company Name"/>
+                        </div>
+                    </div>
+                </div>
+                <!--HOTEL AND BOOKING ID GROUP-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="booking_id">Booking ID :</label>
+                            <input id="booking_id" ng-model="voucher.bk_id" class="form-control" type="text" placeholder="Booking ID"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="hotel_booking_id">Hotel Booking ID:</label>
+                            <input id="hotel_booking_id" ng-model="voucher.htl_bk_id" class="form-control" type="text" placeholder="Hotel Booking ID" />
+                        </div>
+                    </div>
+                </div>
+                <!--ROOM TYPE , NO OF ROOMS , NO OF GUEST-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <label for="room_count">RoomCount: </label>
+                            <input id="room_count" required ng-change="add_rooms()"  ng-model="voucher.room_count" class="form-control" type="number" placeholder="Room Count" />
+                        </div>
+                        <div class="col-md-5">
+                            <label for="room_type">Room Type :</label>
+                            <input ng-show="!voucher.shoeRommDet" id="room_type" ng-model="voucher.room_type" class="form-control" type="text" placeholder="Room Type" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="adult_count">Adults</label>
+                            <input id="adult_count" required ng-model="voucher.adult_count" class="form-control" type="number" placeholder="Adult count"/>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="child_count">Child</label>
+                            <input id="child_count" ng-model="voucher.child_count" class="form-control" type="number" placeholder="Child Count" />
+                        </div>
+                    </div>
+                </div>
+                <!--MEAL PLAN, Inclusion  , AMOUNT -->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label for="meal_plan">Meal Plan :</label>
+                            <select id="meal_plan" class="form-control" ng-model="voucher.meal_plan" ng-show="!voucher.shoeRommDet">
+                                <option value="Room Only">Room Only</option>
+                                <option value="Breakfast">Breakfast</option>
+                                <option value="Breakfast and Dinner">Breakfast and Dinner</option>
+                                <option value="BreakFast, Lunch and Dinner">BreakFast, Lunch and Dinner</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inclusion">Inclusion :</label>
+                            <input id="inclusion" ng-model="voucher.inclusion" class="form-control" type="text" placeholder="Inclusion"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="amount">Amount :</label>
+                            <input id="amount" required ng-model="voucher.amt" class="form-control" type="number" placeholder="Amount"/>
+                        </div>
+                    </div>
+                </div>
+                <!--Remarks-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="cancelation_policy">Remarks :</label>
+                            <textarea id="cancelation_policy" ng-model="voucher.remarks" rows="2" placeholder="Remarks" class="form-control" type="text"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- CANCELATION POLICY-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="cancelation_policy">Cancelation Policy :</label>
+                            <textarea id="cancelation_policy" ng-model="voucher.cancel_pol" rows="5" placeholder="Cancelation Policy" class="form-control" type="text"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- , GUUEST LIST-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="room_det">Room Details: <input type="checkbox" id="room_det" ng-change="add_rooms()" ng-model="voucher.shoeRommDet"> </label>
+
+                        </div>
+                    </div>
+                    <div ng-show="voucher.shoeRommDet" class="form-row">
+                        <!--<div class="col-md-1">-->
+                        <!--<label>Sr No.</label>-->
+                        <!--</div>-->
+                        <div class="col-md-3">
+                            <label for="room_type">Room Type :</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="meal_plan">Meal Plan:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="guest_name">Guest Name:</label>
+                        </div>
+                        <div class="col-md-1">
+                            <label for="guest_cat">Catogoery :</label>
+                        </div>
+                        <div class="col-md-1">
+                            <label for="age">Age:</label>
+                        </div>
+                        <div class="col-md-1">
+                            <label for="ext_bed">Ext. Bed</label>
+                        </div>
+                    </div>
+                    <div class="form-row" ng-repeat="x in voucher.room_types"   ng-show="voucher.shoeRommDet">
+                        <div class="col-md-3">
+                            <input id="room_type" type="text" ng-model="voucher.room_det[$index].room" class="form-control" placeholder="Room Type {{$index+1}}">
+                        </div>
+                        <div class="col-md-3">
+                            <select id="meal_plan" class="form-control" ng-model="voucher.room_det[$index].meal_plan">
+                                <option value="Room Only">Room Only</option>
+                                <option value="Breakfast">Breakfast</option>
+                                <option value="Breakfast and Dinner">Breakfast and Dinner</option>
+                                <option value="BreakFast, Lunch and Dinner">BreakFast, Lunch and Dinner</option>
+                            </select>
+                            <!--<input id="room_type" type="text" ng-model="voucher.room_det[$index].meal_plan" class="form-control" placeholder="Room Type {{$index+1}}">-->
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="list-inline">
+                                <li class="list-inline-item" ng-repeat="y in voucher.room_det[x.room_no - 1].name_list">
+                                    <input id="guest_name" type="text" ng-model="voucher.room_det[x.room_no-1].name_list[$index].name" class="form-control" placeholder="Guest Name {{$index +1}}">
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-md-1">
+                            <ul class="list-inline">
+                                <li class="list-inline-item" ng-repeat="y in voucher.room_det[x.room_no - 1].name_list">
+                                    <select class="form-control" ng-model="voucher.room_det[x.room_no-1].name_list[$index].cat">
+                                        <option value="Adult">Adult</option>
+                                        <option value="Child">Child</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-1">
+                            <ul class="list-inline">
+                                <li class="list-inline-item" ng-repeat="y in voucher.room_det[x.room_no - 1].name_list">
+                                    <input id="guest_name" type="number" ng-model="voucher.room_det[x.room_no-1].name_list[$index].age" class="form-control" placeholder="Guest Name {{$index +1}}">
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-1">
+                            <select id="ext_bed" ng-model="voucher.room_det[$index].ext_bed" ng-init="voucher.room_det[$index].ext_bed = 0" class="form-control">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <!--SUBMINT BUTTON-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-10"></div>
+                        <div class="col-md-2">
+                            <button  type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <!--Footer of the page-->
+        <div id="footer"></div>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+</div>
+
+<!-- The Modal for preview -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm the Voucher Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td>Name : </td>
+                        <th>{{voucher.mst_guest_name.title | uppercase}}  {{voucher.mst_guest_name.fname | uppercase}}  {{voucher.mst_guest_name.lname | uppercase}}</th>
+                        <td> Hotel :</td>
+                        <th>{{voucher.hotel_id.xname | uppercase}},{{voucher.hotel_id.city_name | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>Check in Date: </td>
+                        <th>{{voucher.chk_in_date | date  : 'dd MMM yyyy'}}</th>
+                        <td> Check Out Date :</td>
+                        <th>{{voucher.chk_out_date | date : 'dd MMM yyyy'}}</th>
+                    </tr>
+                    <tr>
+                        <td>Booking Date: </td>
+                        <th>{{voucher.booking_date | date : 'dd MMM yyyy'}}</th>
+                        <td> Booking Company :</td>
+                        <th>{{voucher.booking_company | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>Booking ID: </td>
+                        <th>{{voucher.bk_id | uppercase}}</th>
+                        <td> Hotel Booking ID :</td>
+                        <th>{{voucher.htl_bk_id  | uppercase}}</th>
+                    </tr>
+                    <tr ng-show="!voucher.shoeRommDet">
+                        <td>Room Count: </td>
+                        <th>{{voucher.roon_count}}</th>
+                        <td> Room Type :</td>
+                        <th>{{voucher.room_type | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>Meal Plan :</td>
+                        <th>{{voucher.meal_plan | uppercase}}</th>
+                        <td>Inclusion :</td>
+                        <th>{{voucher.inclusion | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>Adults:</td>
+                        <th>{{voucher.adult_count| uppercase}}</th>
+                        <td>Child :</td>
+                        <th>{{voucher.child_count | uppercase}}</th>
+                    </tr>
+                    <tr>
+                        <td>Amount :</td>
+                        <th>{{voucher.amt| uppercase}}</th>
+                        <td>Cancel Policy :</td>
+                        <th>{{voucher.cancel_pol| uppercase}}</th>
+                    </tr>
+                </table>
+                <table class="table table-hover table-bordered" ng-show="voucher.shoeRommDet">
+                    <tr>
+                        <th>Room No.</th>
+                        <th>Room Type</th>
+                        <th>Meal Plan</th>
+                        <th>Guest List</th>
+                        <th>Extra Bed</th>
+                    </tr>
+                    <tr ng-repeat="x in voucher.room_types">
+                        <td>Room {{$index+1}}</td>
+                        <td>{{voucher.room_det[$index].room | uppercase }}</td>
+                        <td>{{voucher.room_det[$index].meal_plan | uppercase}}</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="y in voucher.room_det[x.room_no - 1].name_list">{{voucher.room_det[x.room_no-1].name_list[$index].name | uppercase}}---{{voucher.room_det[x.room_no -1].name_list[$index].cat | uppercase}}---{{voucher.room_det[x.room_no -1].name_list[$index].age | uppercase}}</li>
+                            </ul>
+                        </td>
+                        <td>{{voucher.room_det[$index].ext_bed | uppercase }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="submit_form_data()">Confirm</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

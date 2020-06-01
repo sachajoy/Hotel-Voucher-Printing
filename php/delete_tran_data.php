@@ -1,0 +1,1 @@
+<?php/** * Created by IntelliJ IDEA. * User: Arihant * Date: 24-05-2018 * Time: 16:53 */require 'connection.php';$rec = file_get_contents("php://input");$sql = "delete from `tran_det` where id = '".$rec."' ";//echo $sql;$res = $conn->query($sql);if ($res){    echo 1;}else    echo 0;?>

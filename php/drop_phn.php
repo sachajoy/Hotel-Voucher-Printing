@@ -1,0 +1,1 @@
+<?php/** * Created by IntelliJ IDEA. * User: Arihant * Date: 11-05-2018 * Time: 16:13 */require 'connection.php';$rec = file_get_contents("php://input");$sql = "delete from `hotel_phn_no` where id = '".$rec."'";$res = $conn->query($sql);if ($res){    echo 1;}else    echo 0;?>
